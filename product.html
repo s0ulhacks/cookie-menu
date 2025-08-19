@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Cookies | SweetBite Cookies</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: linear-gradient(-45deg, #ffd1a4, #ffe0b2, #fff3e0, #ffc107);
+      background-size: 400% 400%;
+      animation: gradientMove 10s ease-in-out infinite;
+      color: #333;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    /* Floating cookie images */
+    .cookie-float {
+      position: absolute;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.13;
+      animation: floatCookie 8s infinite alternate ease-in-out;
+    }
+    .cookie-float.c1 { top: 60px; left: 3vw; width: 70px; animation-delay: 0s;}
+    .cookie-float.c2 { top: 180px; right: 5vw; width: 50px; animation-delay: 2s;}
+    .cookie-float.c3 { bottom: 80px; left: 8vw; width: 60px; animation-delay: 1.5s;}
+    .cookie-float.c4 { bottom: 40px; right: 10vw; width: 80px; animation-delay: 3s;}
+    @keyframes floatCookie {
+      0% { transform: translateY(0) rotate(0deg);}
+      100% { transform: translateY(-30px) rotate(12deg);}
+    }
+    header {
+      background: linear-gradient(90deg, #d2691e 60%, #ffb347 100%);
+      color: white;
+      padding: 45px 20px 28px 20px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(210, 105, 30, 0.12);
+      position: relative;
+      overflow: hidden;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      margin: 0;
+      animation: popIn 1s cubic-bezier(.68,-0.55,.27,1.55);
+      text-shadow: 0 4px 24px #ffb34788, 0 1px 0 #fff;
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.7) translateY(-40px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+    header p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      letter-spacing: 1px;
+      animation: fadeInDown 1.2s 0.3s both;
+    }
+    @keyframes fadeInDown {
+      0% { opacity: 0; transform: translateY(-20px);}
+      100% { opacity: 1; transform: translateY(0);}
+    }
+    nav {
+        background: linear-gradient(90deg, bisque 60%, #ffd1a4 100%);
+        color: #d2691e;
+        padding: 15px 0;
+        text-align: center;
+        box-shadow: 0 2px 12px rgba(244, 164, 96, 0.08);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+    nav a {
+      color: #d2691e;
+      margin: 0 18px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      padding: 8px 18px;
+      border-radius: 30px;
+      transition: 
+        background 0.3s cubic-bezier(.68,-0.55,.27,1.55),
+        color 0.3s cubic-bezier(.68,-0.55,.27,1.55),
+        box-shadow 0.3s;
+      position: relative;
+      box-shadow: 0 2px 8px rgba(255, 193, 7, 0.08);
+    }
+    nav a:hover, nav a:focus {
+      background: #fff3e0;
+      color: #b85818;
+      box-shadow: 0 4px 16px white;
+      text-shadow: 0 1px 0 #fff;
+      outline: none;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 50px auto 40px auto;
+      padding: 24px;
+      background: rgba(255,255,255,0.93);
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(255, 193, 7, 0.10);
+      animation: fadeInUp 1.2s;
+      position: relative;
+      z-index: 1;
+    }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(40px);}
+      100% { opacity: 1; transform: translateY(0);}
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      color: #d2691e;
+      font-size: 2rem;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 12px #ffd1a4aa;
+      animation: popIn 1.1s 0.2s both;
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 32px;
+      margin-bottom: 10px;
+    }
+    .product-card {
+      background: linear-gradient(135deg, #fffbe6 70%, #ffe0b2 100%);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(210, 105, 30, 0.10), 0 2px 8px #ffd1a4aa;
+      text-align: center;
+      padding: 24px 18px 20px 18px;
+      transition: 
+        transform 0.35s cubic-bezier(.68,-0.55,.27,1.55),
+        box-shadow 0.35s cubic-bezier(.68,-0.55,.27,1.55);
+      position: relative;
+      cursor: pointer;
+      animation: floatItem 2.5s infinite ease-in-out alternate;
+    }
+    @keyframes floatItem {
+      0% { transform: translateY(0);}
+      100% { transform: translateY(-8px);}
+    }
+    .product-card:hover {
+      transform: scale(1.045) translateY(-10px) rotate(-1deg);
+      box-shadow: 0 16px 48px #ffd1a4cc, 0 4px 16px #d2691e33;
+      z-index: 2;
+    }
+    .product-card img {
+      width: 100%;
+      max-height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      border-bottom: 2px solid #ffd1a4;
+      transition: filter 0.4s, transform 0.4s;
+      filter: brightness(0.97) saturate(1.1);
+    }
+    .product-card:hover img {
+      filter: brightness(1.08) saturate(1.25) drop-shadow(0 2px 16px #ffd1a4cc);
+      transform: scale(1.04) rotate(-1deg);
+    }
+    .product-name {
+      font-size: 1.18rem;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #d2691e;
+      letter-spacing: 0.5px;
+      text-shadow: 0 1px 8px #ffd1a4aa;
+      transition: color 0.3s;
+    }
+    .product-card:hover .product-name {
+      color: #ff9800;
+    }
+    .price {
+      color: #b85818;
+      font-size: 1.05rem;
+      margin-top: 5px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+      transition: color 0.3s;
+    }
+    .product-card:hover .price {
+      color: #d2691e;
+    }
+    .buy-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 16px;
+  background-color: #d2691e;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.3s;
+}
+
+.buy-btn:hover {
+  background-color: #a0522d;
+}
+    footer {
+      background: linear-gradient(90deg, #d2691e 60%, #ffb347 100%);
+      color: white;
+      text-align: center;
+      padding: 24px 10px;
+      margin-top: 50px;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      box-shadow: 0 -4px 24px #ffd1a455;
+      position: relative;
+      z-index: 1;
+      animation: fadeInUp 1.2s 0.2s both;
+    }
+    @media (max-width: 700px) {
+      header h1 { font-size: 1.5rem;}
+      .container { padding: 8px;}
+      h2 { font-size: 1.1rem;}
+      .product-name { font-size: 1rem;}
+      .price { font-size: 0.95rem;}
+    }
+    @media (max-width: 500px) {
+      .container { margin: 18px auto;}
+      .products-grid { gap: 16px;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- Decorative floating cookies -->
+<img src="cookie pic 1.jpg" class="cookie-float c1" alt="" />
+<img src="Chocolate chips.jpg" class="cookie-float c2" alt="" />
+<img src="red velvet.jpg" class="cookie-float c3" alt="" />
+<img src="Coconut cookies.jpg" class="cookie-float c4" alt="" />
+
+<header>
+  <h1>SweetBite Cookies</h1>
+  <p>Our Delicious Cookie Selection</p>
+</header>
+
+<nav>
+    <a href="index.html">Back</a>
+</nav>
+
+<div class="container">
+  <h2>Our Bestselling Cookies</h2>
+
+  <div class="products-grid">
+
+    <div class="product-card">
+      <img src="Chocolate chips.jpg" alt="Chocolate Chip Cookies">
+      <div class="product-name">Chocolate Chip Cookies</div>
+      <div class="price">₦7,500 / Pack</div>
+      <a class="buy-btn" href="https://wa.me/+2349037472125?text=Hi%20SweetBite!%20I'm%20interested%20in%20ordering%20Chocolate%20Chip%20Cookies" target="_blank">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+      <img src="oatmeal raisin cookies.jpg" alt="Oatmeal Raisin Cookies">
+      <div class="product-name">Oatmeal Raisin Cookies</div>
+      <div class="price">₦9200 / Pack</div>
+      <a class="buy-btn" href="https://wa.me/+2349037472125?text=Hi%20SweetBite!%20I'm%20interested%20in%20ordering%20Oatmeal%20Raisin%20Cookies" target="_blank">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+      <img src="Peanut cookies.jpg" alt="Peanut Butter Cookies">
+      <div class="product-name">Peanut Butter Cookies</div>
+      <div class="price">₦8,000 / Pack</div>
+      <a class="buy-btn" href="https://wa.me/+2349037472125?text=Hi%20SweetBite!%20I'm%20interested%20in%20ordering%20Peanut%20Butter%20Cookies" target="_blank">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+      <img src="red velvet.jpg" alt="Red Velvet Cookies">
+      <div class="product-name">Red Velvet Cookies</div>
+      <div class="price">₦10,000 / Pack</div>
+      <a class="buy-btn" href="https://wa.me/+2349037472125?text=Hi%20SweetBite!%20I'm%20interested%20in%20ordering%20Red%20Velvet%20Cookies" target="_blank">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+      <img src="double choco chips.jpg" alt="Double Chocolate Cookies">
+      <div class="product-name">Double Chocolate Cookies</div>
+      <div class="price">₦10,600 / Pack</div>
+      <a class="buy-btn" href="https://wa.me/+2349037472125?text=Hi%20SweetBite!%20I'm%20interested%20in%20ordering%20Double%20Chocolate%20Cookies" target="_blank">Buy Now</a>
+    </div>
+
+    <div class="product-card">
+      <img src="Coconut cookies.jpg" alt="Coconut Crunch Cookies">
+      <div class="product-name">Coconut Crunch Cookies</div>
+      <div class="price">₦14,000 / Pack</div>
+      <a class="buy-btn" href="https://wa.me/+2349037472125?text=Hi%20SweetBite!%20I'm%20interested%20in%20ordering%20Coconut%20Crunch%20Cookies" target="_blank">Buy Now</a>
+    </div>
+    <!-- Cookies -->
+<div class="product-card">
+  <img src="butter scotch.jpg" alt="Butterscotch Cookies">
+  <div class="product-name">Butterscotch Cookies</div>
+  <div class="price">₦8,500 / Pack</div>
+  <a class="buy-btn" href="https://+2349037472125?text=Hi%20SweetBite!%20I'm%20interested%20in%20ordering%20Butterscotch%20Cookies" target="_blank">Buy Now</a>
+</div>
+
+<div class="product-card">
+  <img src="white butter.jpg" alt="White Chocolate Cookies">
+  <div class="product-name">White Chocolate Cookies</div>
+  <div class="price">₦11,000 / Pack</div>
+  <a class="buy-btn" href="https://wa.me/+2349037472125?text=Hi%20SweetBite!%20I'm%20interested%20in%20ordering%20White%20Chocolate%20Cookies" target="_blank">Buy Now</a>
+</div>
+
+<div class="product-card">
+  <img src="mint cookies.jpg" alt="Mint Chocolate Cookies">
+  <div class="product-name">Mint Chocolate Cookies</div>
+  <div class="price">₦9,800 / Pack</div>
+  <a class="buy-btn" href="https://wa.me/+2349037472125?text=Hi%20SweetBite!%20I'm%20interested%20in%20ordering%20Chocolate%20Chip%20Cookies" target="_blank">Buy Now</a>
+</div>
+
+<div class="product-card">
+  <img src="hazelnut.jpg" alt="Hazelnut Crunch Cookies">
+  <div class="product-name">Hazelnut Crunch Cookies</div>
+  <div class="price">₦9,200 / Pack</div>
+  <a class="buy-btn" href="https://wa.me/+2349037472125?text=Hi%20SweetBite!%20I'm%20interested%20in%20ordering%20Hazelnut%20Crunch%20Cookies" target="_blank">Buy Now</a>
+</div>
+
+<div class="product-card">
+  <img src="oreos.jpg" alt="Oreo Blast Cookies">
+  <div class="product-name">Oreo Blast Cookies</div>
+  <div class="price">₦10,200 / Pack</div>
+  <a class="buy-btn" href="https://wa.me/+2349037472125?text=Hi%20SweetBite!%20I'm%20interested%20in%20ordering%20Ore%20Blast%20Cookies" target="_blank">Buy Now</a>
+</div>
+
+<!-- Pastries -->
+<div class="product-card">
+  <img src="brownies.jpg" alt="Chocolate Brownies">
+  <div class="product-name">Chocolate Brownies</div>
+  <div class="price">₦7,000 / Box (6 pcs)</div>
+  <a class="buy-btn" href="https://wa.me/+2349037472125?text=Hi%20SweetBite!%20I'm%20interested%20in%20ordering%20Chocolate%20Brownies" target="_blank">Buy Now</a>
+</div>
+
+<div class="product-card">
+  <img src="rv .jpg" alt="Red Velvet Cupcakes">
+  <div class="product-name">Red Velvet Cupcakes</div>
+  <div class="price">₦6,500 / Box (6 pcs)</div>
+  <a class="buy-btn" href="https://wa.me/+2349037472125?text=Hi%20SweetBite!%20I'm%20interested%20in%20ordering%20Red%20Velvet%20Cupcakes" target="_blank">Buy Now</a>
+</div>
+
+<div class="product-card">
+  <img src="banana.jpg" alt="Banana Muffins">
+  <div class="product-name">Banana Muffins</div>
+  <div class="price">₦5,800 / Box (6 pcs)</div>
+  <a class="buy-btn" href="https://wa.me/+2349037472125?text=Hi%20SweetBite!%20I'm%20interested%20in%20ordering%20Banana%20Muffins" target="_blank">Buy Now</a>
+</div>
+
+<div class="product-card">
+  <img src="doughnuts.jpg" alt="Glazed Doughnuts">
+  <div class="product-name">Glazed Doughnuts</div>
+  <div class="price">₦4,500 / Box (5 pcs)</div>
+  <a class="buy-btn" href="https://wa.me/+2349037472125?text=Hi%20SweetBite!%20I'm%20interested%20in%20ordering%20Glazed%20Dooughnuts" target="_blank">Buy Now</a>
+</div>
+
+<div class="product-card">
+  <img src="lemon.jpg" alt="Lemon Tarts">
+  <div class="product-name">Lemon Tarts</div>
+  <div class="price">₦7,200 / Box (4 pcs)</div>
+  <a class="buy-btn" href="https://wa.me/+2349037472125?text=Hi%20SweetBite!%20I'm%20interested%20in%20ordering%20Lemon%20Tarts" target="_blank">Buy Now</a>
+</div>
+
+<div class="product-card">
+  <img src="vanilla.jpg" alt="Vanilla Cupcakes">
+  <div class="product-name">Vanilla Cupcakes</div>
+  <div class="price">₦6,000 / Box (6 pcs)</div>
+  <a class="buy-btn" href="https://wa.me/+2349037472125?text=Hi%20SweetBite!%20I'm%20interested%20in%20ordering%20Chocolate%20Chip%20Cookies" target="_blank">Buy Now</a>
+</div>
+
+<div class="product-card">
+  <img src="sprinkles.jpg" alt="Vanilla Cakes">
+  <div class="product-name"> Sprinkled Vanilla Cakes</div>
+  <div class="price">₦23,000 / Box (6 pcs)</div>
+  <a class="buy-btn" href="https://wa.me/+2349037472125?text=Hi%20SweetBite!%20I'm%20interested%20in%20ordering%20Sprinkled%20Vanilla%20Cakes" target="_blank">Buy Now</a>
+</div>
+
+<div class="product-card">
+  <img src="chocolate cakes.jpg" alt="Chocolate coated cakes">
+  <div class="product-name">Chocolate Coated Cakes</div>
+  <div class="price">₦25,000 / Box (6 pcs)</div>
+  <a class="buy-btn" href="https://wa.me/+2349037472125?text=Hi%20SweetBite!%20I'm%20interested%20in%20ordering%20Chocolate%20Coated%20Cakes" target="_blank">Buy Now</a>
+</div>
+
+<div class="product-card">
+  <img src="breakfast.jpg" alt="Breakfast Specials">
+  <div class="product-name">Breakfast Specials</div>
+  <div class="price">₦6,000 / Box (6 pcs)</div>
+  <a class="buy-btn" href="https://wa.me/+2349037472125?text=Hi%20SweetBite!%20I'm%20interested%20in%20ordering%20Brekfast%20Specials" target="_blank">Buy Now</a>
+</div>
+
+  </div>
+</div>
+
+<footer>
+  <P>Author: Praise Oseh</P>
+  <p>© 2025 SweetBite Cookies. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
